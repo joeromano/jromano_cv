@@ -1,5 +1,11 @@
 \begin{thebibliography}{1}
 
+\bibitem{Romano-ICRA15-APC}
+Joseph~M. Romano and Pete Wurman.
+\newblock Amazon {P}icking {C}hallenge.
+\newblock Lead organizer and designer of cooperative academia-industry robot
+  challenge at ICRA conference, May 2015.
+
 \bibitem{Romano-EH10-321}
 Joseph~M. Romano, Nils Landin, William McMahan, and Katherine~J. Kuchenbecker.
 \newblock Texturepad: Realistic rendering of haptic textures.
