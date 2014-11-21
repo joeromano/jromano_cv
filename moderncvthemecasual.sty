@@ -140,8 +140,8 @@
       \ifthenelse{\isundefined{\@mobile}}{}{\footersymbol\mobilesymbol~\@mobile\@firstfooterelementfalse}%
       \ifthenelse{\isundefined{\@phone}}{}{\footersymbol\phonesymbol~\@phone\@firstfooterelementfalse}%
       \ifthenelse{\isundefined{\@fax}}{}{\footersymbol\faxsymbol~\@fax\@firstfooterelementfalse}%
-      \ifthenelse{\isundefined{\@email}}{}{\footersymbol\emailsymbol~\emaillink{\@email}\@firstfooterelementtrue}\newline{}%
-      \ifthenelse{\isundefined{\@homepagedisplay}}{}{\footersymbol\homepagesymbol~\httplink[\@homepagedisplay]{\@homepageurl}\@firstfooterelementfalse}%
+      \ifthenelse{\isundefined{\@email}}{}{\footersymbol\emailsymbol~\emaillink{\@email}\@firstfooterelementtrue}%
+      %\ifthenelse{\isundefined{\@homepagedisplay}}{}{\footersymbol\homepagesymbol~\httplink[\@homepagedisplay]{\@homepageurl}\@firstfooterelementfalse}%
       \ifthenelse{\isundefined{\@extrainfo}}{}{\footersymbol\@extrainfo\@firstfooterelementfalse}}}%
   }%
   \pagestyle{plain}}

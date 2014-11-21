@@ -30,7 +30,7 @@
 #
 fileinfo	:= LaTeX Makefile
 author		:= Chris Monson
-version		:= 2.2.1-alpha7
+version		:= 2.2.1-alpha9
 #
 .DEFAULT_GOAL	:= all
 # Note that the user-global version is imported *after* the source directory,
@@ -44,8 +44,8 @@ version		:= 2.2.1-alpha7
 -include $(HOME)/.latex-makefile/Variables.ini
 #
 # This can be pdflatex or latex - you can change this by adding the following line to your Makefile.ini:
- BUILD_STRATEGY := latex
-#BUILD_STRATEGY		?= pdflatex
+# BUILD_STRATEGY := latex
+BUILD_STRATEGY		?= pdflatex
 # This can be used to pass extra options to latex.
 LATEX_OPTS		?=
 #
@@ -62,6 +62,7 @@ export LC_ALL		?= C
 #onlysources.tex.pl	?=
 #onlysources.tex.py	?=
 #onlysources.rst	?=
+#onlysources.mp		?=
 #onlysources.fig	?=
 #onlysources.gpi	?=
 #onlysources.dot	?=
@@ -77,6 +78,7 @@ export LC_ALL		?= C
 #includes.tex.pl	?=
 #includes.tex.py	?=
 #includes.rst		?=
+#includes.mp		?=
 #includes.fig		?=
 #includes.gpi		?=
 #includes.dot		?=
@@ -115,6 +117,18 @@ export LC_ALL		?= C
 #
 #
 # CHANGES:
+# Chris Monson (2012-06-25):
+# * Bumped version to 2.2.1-alpha9
+# * Built with Holger Dell's changes to fix multiple unnecessary compilations.
+# Chris Monson (2011-11-10):
+# * Issue 144: Help patch from girard.nicolas applied
+# Andrew McNabb (2011-09-30):
+# * Bumped version to 2.2.1-alpha8
+# * Issue 141: No font embedding for gnuplot when not doing pdf
+# * Syntax error fixed for gpi handling code
+# Chris Monson (2011-09-06):
+# * Issue 140: clean mlt*, mlf*, and mtc* files
+# * Issue 136: initial support for metapost files
 # Chris Monson (2011-08-09):
 # * Bumped version to 2.2.1-alpha7
 # * Issue 138: existing .eps files now included correctly
@@ -750,6 +764,7 @@ LHS2TEX		?= lhs2tex
 CONVERT		?= convert	# ImageMagick
 DOT		?= dot		# GraphViz
 DOT2TEX		?= dot2tex	# dot2tex - add options (not -o) as needed
+MPOST		?= mpost	# MetaPost
 FIG2DEV		?= fig2dev	# XFig
 GNUPLOT		?= gnuplot	# GNUplot
 INKSCAPE	?= inkscape	# Inkscape (svg support)
@@ -761,8 +776,8 @@ GUNZIP		?= gunzip	# GZipped EPS
 # == Beamer Enlarged Output ==
 PSNUP		?= psnup
 # == Viewing Stuff ==
-VIEW_POSTSCRIPT	?= okular
-VIEW_PDF	?= okular
+VIEW_POSTSCRIPT	?= gv
+VIEW_PDF	?= evince
 VIEW_GRAPHICS	?= display
 
 # Xindy glossaries
@@ -896,6 +911,25 @@ GRAY	?= $(call get-default,$(GREY),)
 #
 # Utility Functions and Definitions
 #
+#
+# Transcript
+# For debug/testing purposes: writes a message to
+# filename.transcript.make for each command that was run, including
+# some human-readable justification for why it had to be run.
+# For example: "Running latex (log-file indicated that this is necessary)"
+# Set WRITE_TRANSCRIPT to something to activate
+WRITE_TRANSCRIPT ?=
+# Set reason for the next run call
+# $(call set-run-reason,message)
+set-run-reason = export run_reason="$1"
+# Log command to the transcript file
+# $(call set-run-reason,command,job_name)
+define transcript
+$(if $(WRITE_TRANSCRIPT), \
+	$(ECHO) "Running $1 ($$run_reason)" >> $2.transcript.make; \
+	export run_reason="", \
+	$(sh_true))
+endef
 
 # Don't call this directly - it is here to avoid calling wildcard more than
 # once in remove-files.
@@ -949,6 +983,8 @@ escape-fname-regex	= $(subst /,\\/,$(subst .,\\.,$1))
 # Test that a file exists
 # $(call test-exists,file)
 test-exists		= [ -e '$1' ]
+# $(call test-not-exists,file)
+test-not-exists   = [ ! -e '$1' ]
 
 # $(call move-files,source,destination)
 move-if-exists		= $(call test-exists,$1) && $(MV) '$1' '$2'
@@ -1144,6 +1180,7 @@ all_files.tex.pl	?= $(wildcard *.tex.pl)
 all_files.tex.py	?= $(wildcard *.tex.py)
 all_files.rst		?= $(wildcard *.rst)
 all_files.lhs		?= $(wildcard *.lhs)
+all_files.mp		?= $(wildcard *.mp)
 all_files.fig		?= $(wildcard *.fig)
 all_files.gpi		?= $(wildcard *.gpi)
 all_files.dot		?= $(wildcard *.dot)
@@ -1194,6 +1231,7 @@ files.rst	:= $(call filter-buildable,rst)
 files.lhs	:= $(call filter-buildable,lhs)
 files.gpi	:= $(call filter-buildable,gpi)
 files.dot	:= $(call filter-buildable,dot)
+files.mp	:= $(call filter-buildable,mp)
 files.fig	:= $(call filter-buildable,fig)
 files.xvg	:= $(call filter-buildable,xvg)
 files.svg	:= $(call filter-buildable,svg)
@@ -1223,6 +1261,7 @@ default_files.rst	:= $(call filter-default,rst)
 default_files.lhs	:= $(call filter-default,lhs)
 default_files.gpi	:= $(call filter-default,gpi)
 default_files.dot	:= $(call filter-default,dot)
+default_files.mp	:= $(call filter-default,mp)
 default_files.fig	:= $(call filter-default,fig)
 default_files.xvg	:= $(call filter-default,xvg)
 default_files.svg	:= $(call filter-default,svg)
@@ -1262,6 +1301,7 @@ all_stems.tex.pl	:= $(call get-stems,tex.pl,all)
 all_stems.tex.py	:= $(call get-stems,tex.py,all)
 all_stems.rst		:= $(call get-stems,rst,all)
 all_stems.lhs		:= $(call get-stems,lhs,all)
+all_stems.mp		:= $(call get-stems,mp,all)
 all_stems.fig		:= $(call get-stems,fig,all)
 all_stems.gpi		:= $(call get-stems,gpi,all)
 all_stems.dot		:= $(call get-stems,dot,all)
@@ -1280,6 +1320,7 @@ default_stems.tex.pl		:= $(call get-stems,tex.pl,default)
 default_stems.tex.py		:= $(call get-stems,tex.py,default)
 default_stems.rst		:= $(call get-stems,rst,default)
 default_stems.lhs		:= $(call get-stems,lhs,default)
+default_stems.mp		:= $(call get-stems,mp,default)
 default_stems.fig		:= $(call get-stems,fig,default)
 default_stems.gpi		:= $(call get-stems,gpi,default)
 default_stems.dot		:= $(call get-stems,dot,default)
@@ -1298,6 +1339,7 @@ stems.tex.pl		:= $(call get-stems,tex.pl)
 stems.tex.py		:= $(call get-stems,tex.py)
 stems.rst		:= $(call get-stems,rst)
 stems.lhs		:= $(call get-stems,lhs)
+stems.mp		:= $(call get-stems,mp)
 stems.fig		:= $(call get-stems,fig)
 stems.gpi		:= $(call get-stems,gpi)
 stems.dot		:= $(call get-stems,dot)
@@ -1314,7 +1356,8 @@ stems.eps		:= $(call get-stems,eps)
 concat-stems	= $(sort $(foreach s,$1,$($(if $2,$2_,)stems.$s)))
 
 # The most likely to be source but not finished product go first
-graphic_source_extensions	:= fig \
+graphic_source_extensions	:= mp \
+				   fig \
 				   gpi \
 				   xvg \
 				   svg \
@@ -1490,7 +1533,7 @@ endif
 # Extensions generated by LaTeX invocation that can be removed when complete
 rm_ext		:= \
 	log *.log aux $(pre_pdf_extensions) pdf blg bbl out nav snm toc lof lot lol pfg \
-	fls vrb idx ind ilg glg glo gls lox nls nlo nlg brf mtc maf brf ist fmt
+	fls vrb idx ind ilg glg glo gls lox nls nlo nlg brf mtc* mlf* mlt* maf brf ist fmt
 backup_patterns	:= *~ *.bak *.backup body.tmp head.tmp
 
 graph_stem	:= _graph
@@ -1851,7 +1894,7 @@ endef
 #
 # $(call die-on-no-aux,<aux stem>)
 define die-on-no-aux
-if [ ! -e '$1.aux' ]; then \
+if $(call test-not-exists,$1.aux); then \
 	$(call colorize-latex-errors,$1.log); \
 	$(ECHO) "$(C_ERROR)Error: failed to create $1.aux$(C_RESET)"; \
 	exit 1; \
@@ -2168,22 +2211,26 @@ endef
 
 # Get all important .aux files from the top-level .aux file and merges them all
 # into a single file, which it outputs to stdout.
+# It does this by finding all \input commands and creating a new sed script
+# that reads those files inline when it encounters one.
+# It then runs that sed script, generating a flattened aux file, and
+# then it cleans up the flattened file by removing some crufty things.
 #
 # $(call flatten-aux,<toplevel aux>,<output file>)
 define flatten-aux
 $(SED) \
 -e '/\\@input{\(.*\)}/{' \
--e     's//\1/' \
--e     's![.:]!\\&!g' \
--e     'h' \
--e     's!.*!\\:\\\\@input{&}:{!' \
--e     'p' \
--e     'x' \
--e     's/\\././g' \
--e     's/.*/r &/p' \
--e     's/.*/d/p' \
--e     's/.*/}/p' \
--e     'd' \
+-e '  s//\1/' \
+-e '  s![.:]!\\&!g' \
+-e '  h' \
+-e '  s!.*!\\:\\\\@input{&}:{!' \
+-e '  p' \
+-e '  x' \
+-e '  s/\\././g' \
+-e '  s/.*/r &/p' \
+-e '  s/.*/d/p' \
+-e '  s/.*/}/p' \
+-e '  d' \
 -e '}' \
 -e 'd' \
 '$1' > "$1.$$$$.sed.make"; \
@@ -2289,7 +2336,10 @@ $(SED) \
 enlarge_beamer	= $(PSNUP) -l -1 -W128mm -H96mm -pletter
 
 # $(call test-run-again,<source stem>)
-test-run-again	= $(EGREP) -q '^(.*Rerun .*|No file $1\.[^.]+\.)$$' $1.log
+define test-run-again
+$(EGREP) '^(.*Rerun .*|No file $1\.[^.]+\.)$$' $1.log \
+| $(EGREP) -q -v '^(Package: rerunfilecheck.*Rerun checks for auxiliary files.*)$$'
+endef
 
 # This tests whether the build target commands should be run at all, from
 # viewing the log file.
@@ -2298,7 +2348,8 @@ define test-log-for-need-to-run
 $(SED) \
 -e '/^No file $(call escape-fname-regex,$1)\.aux\./d' \
 $1.log \
-| $(EGREP) -q '^(.*Rerun .*|No file $1\.[^.]+\.|No file .+\.tex\.|LaTeX Warning: File.*)$$'
+| $(EGREP) '^(.*Rerun .*|No file $1\.[^.]+\.|No file .+\.tex\.|LaTeX Warning: File.*)$$' \
+| $(EGREP) -q -v '^(Package: rerunfilecheck.*Rerun checks for auxiliary files.*)$$'
 endef
 
 # LaTeX invocations
@@ -2312,7 +2363,8 @@ endef
 #
 # $(call latex,<tex file stem, e.g., $*>,[extra LaTeX args])
 define run-latex
-$(latex_build_program) -jobname='$1' -interaction=batchmode -file-line-error $(LATEX_OPTS) $(if $2,$2,) $1 > /dev/null
+$(latex_build_program) -jobname='$1' -interaction=batchmode -file-line-error $(LATEX_OPTS) $(if $2,$2,) $1 > /dev/null; \
+$(call transcript,latex,$1)
 endef
 
 # $(call latex-color-log,<LaTeX stem>)
@@ -2326,6 +2378,7 @@ then \
 	$(call colorize-makeindex-errors,$3); \
 	$(RM) -f '$2'; \
 	success=0; \
+	$(call transcript,makeindex,$1); \
 fi; \
 [ "$$success" = "1" ] && $(sh_true) || $(sh_false);
 endef
@@ -2337,6 +2390,7 @@ if ! $(XINDY) -q -o $2 -L $(XINDYLANG) -C $(XINDYENC) -I xindy -M $3 -t $4 $1 > 
 	$(call colorize-xindy-errors,$4); \
 	$(RM) -f '$2'; \
 	success=0; \
+	$(call transcript,xindy,$1); \
 fi; \
 [ "$$success" = "1" ] && $(sh_true) || $(sh_false);
 endef
@@ -2347,7 +2401,8 @@ endef
 #
 # $(call run-script,<interpreter>,<input>,<output>)
 define run-script
-[ ! -e '$2.cookie' ] && $(ECHO) "restarts=$(RESTARTS)" > $2.cookie && $(ECHO) "level=$(MAKELEVEL)" >> $2.cookie; \
+$(call test-not-exists,$2.cookie) && $(ECHO) "restarts=$(RESTARTS)" \
+	> $2.cookie && $(ECHO) "level=$(MAKELEVEL)" >> $2.cookie; \
 restarts=`$(SED) -n -e 's/^restarts=//p' $2.cookie`; \
 level=`$(SED) -n -e 's/^level=//p' $2.cookie`; \
 if $(EXPR) $(MAKELEVEL) '<=' $$level '&' $(RESTARTS) '<=' $$restarts >/dev/null; then \
@@ -2361,8 +2416,7 @@ endef
 # BibTeX invocations
 #
 # $(call run-bibtex,<tex stem>)
-run-bibtex	= $(BIBTEX) $1 | $(color_bib)
-
+run-bibtex	= $(BIBTEX) $1 | $(color_bib); $(call transcript,bibtex,$1)
 
 # $(call convert-eps-to-pdf,<eps file>,<pdf file>,[gray])
 # Note that we don't use the --filter flag because it has trouble with bounding boxes that way.
@@ -2442,9 +2496,9 @@ success=1; \
 if ! $(GNUPLOT) $$fnames 2>$1.log; then \
 	$(call colorize-gnuplot-errors,$1.log); \
 	success=0; \
-else \
+elif [ x"$(suffix $2)" = x".pdf" ]; then \
 	if ! $(call gpi-embed-pdf-fonts,$2,$2.embed.tmp.make); then \
-		success = 0; \
+		success=0; \
 	else \
 		$(call move-if-exists,$2.embed.tmp.make,$2); \
 	fi; \
@@ -2835,24 +2889,29 @@ endif
 	run=0; \
 	for i in 1; do \
 		if $(call test-exists,$*.bbl.cookie); then \
+			$(call set-run-reason,$*.bbl.cookie is present); \
 			run=1; \
 			break; \
 		fi; \
 		if $(call test-exists,$*.run.cookie); then \
+			$(call set-run-reason,$*.run.cookie is present); \
 			run=1; \
 		    	break; \
 		fi; \
 		if $(call \
 		test-exists-and-different,$*.auxtarget.cookie,$*.auxtarget.make);\
 		then \
+			$(call set-run-reason,$*.auxtarget.cookie differs from $*.auxtarget.make); \
 			run=1; \
 			break; \
 		fi; \
 		if $(call test-log-for-need-to-run,$*); then \
+			$(call set-run-reason,$*.log indicated that this is necessary); \
 			run=1; \
 			break; \
 		fi; \
-		if [ ! -e $*.1st.*.make ]; then \
+		if $(call test-not-exists,$@.1st.make); then \
+			$(call set-run-reason,$@.1st.make does not exist); \
 			run=1; \
 			break; \
 		fi; \
@@ -2868,7 +2927,11 @@ endif
 			); \
 			$(call run-latex,$*); \
 			$(CP) '$*.log' '$*.'$(RESTARTS)-$$i'.log'; \
-			$(call test-run-again,$*) || break; \
+			if $(call test-run-again,$*); then \
+				$(call set-run-reason,rerun requested by $*.log); \
+			else \
+				break; \
+			fi; \
 		done; \
 	else \
 		$(MV) '$@.1st.make' '$@'; \
@@ -2892,6 +2955,7 @@ endif
 	$(QUIET)\
 	$(if $(filter %.bib,$^),\
 		$(call echo-build,$(filter %.bib,$?) $*.aux,$@); \
+		$(call set-run-reason,dependencies of $@ changed); \
 		$(call run-bibtex,$*); \
 		$(TOUCH) $@.cookie; \
 	) \
@@ -3035,6 +3099,15 @@ endif
 endif
 
 
+# TODO: capture mpost output and display errors
+# TODO: figure out why pdf generation is erroring out (but working anyway)
+%.eps %.mps %.mpx %.log: %.mp
+	$(QUIET)$(call echo-graphic,$^,$@)
+	$(QUIET)$(MPOST) $*
+	$(QUIET)$(call move-if-exists,$*.mps,$*.eps)
+	$(QUIET)$(call move-if-exists,$*.log,$*.log.make)
+	$(QUIET)$(call move-if-exists,$*.mpx,$*.mpx.make)
+
 %.eps:	%.gpi %.gpi.d $(gpi_sed) $(gpi_global)
 	$(QUIET)$(call echo-graphic,$^,$@)
 	$(QUIET)$(call convert-gpi,$<,$@,$(GRAY))
@@ -3135,6 +3208,7 @@ endif
 %.$(build_target_extension).1st.make %.d %.aux %.aux.make %.fls: %.tex
 	$(QUIET)$(call echo-build,$<,$*.d $*.$(build_target_extension).1st.make,$(RESTARTS)-1)
 	$(QUIET)\
+	$(call set-run-reason,need to build .d and .$(build_target_extension).1st.make); \
 	$(call run-latex,$*,-recorder) || $(sh_true); \
 	$(CP) '$*.log' '$*.$(RESTARTS)-1.log'; \
 	$(call die-on-import-sty,$*.log); \
@@ -3454,7 +3528,7 @@ define help_text
 #             ./generating_script.weird_lang > $$@
 #
 #          In this file, you have access to all of the variables that the
-#          makefile creates, like $(onlysources.tex).  While accessing those can
+#          makefile creates, like $$(onlysources.tex).  While accessing those can
 #          be somewhat brittle (they are implementation details and may change),
 #          it is a great way to test your ideas when submitting feature requests.
 #
