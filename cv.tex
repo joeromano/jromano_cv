@@ -1,0 +1,186 @@
+%% start of file `template.tex'.
+%% Copyright 2006-2010 Xavier Danaux (xdanaux@gmail.com).
+%
+% This work may be distributed and/or modified under the
+% conditions of the LaTeX Project Public License version 1.3c,
+% available at http://www.latex-project.org/lppl/.
+
+
+\documentclass[11pt,letterpaper]{moderncv}
+
+% moderncv themes
+\moderncvtheme[blue]{casual}                 % optional argument are 'blue' (default), 'orange', 'red', 'green', 'grey' and 'roman' (for roman fonts, instead of sans serif fonts)
+%\moderncvtheme[green]{classic}                % idem
+
+% character encoding
+\usepackage[utf8]{inputenc}                   % replace by the encoding you are using
+
+% adjust the page margins
+\usepackage[scale=0.8]{geometry}
+%\setlength{\hintscolumnwidth}{3cm}						% if you want to change the width of the column with the dates
+%\AtBeginDocument{\setlength{\maketitlenamewidth}{6cm}}  % only for the classic theme, if you want to change the width of your name placeholder (to leave more space for your address details
+%\AtBeginDocument{\recomputelengths}                     % required when changes are made to page layout lengths
+
+% personal data
+\firstname{Joseph}
+\familyname{Romano}
+\title{Resumé title (optional)}               % optional, remove the line if not wanted
+\address{23 Saint Stephen St.}{Boston MA, 02115 }    % optional, remove the line if not wanted
+\mobile{973.713.0889}                    % optional, remove the line if not wanted
+\phone{617.500.2487}                    % optional, remove the line if not wanted
+\email{joeromano@gmail.com}                      % optional, remove the line if not wanted
+\homepage{www.jromano.uphero.com}{www.jromano.uphero.com}                % optional, remove the line if not wanted
+%\extrainfo{additional information (optional)} % optional, remove the line if not wanted
+\photo[184pt]{./figures/pound}                         % '64pt' is the height the picture must be resized to and 'picture' is the name of the picture file; optional, remove the line if not wanted
+%\quote{some quote "To be or not to be"}                 % optional, remove the line if not wanted
+
+% to show numerical labels in the bibliography; only useful if you make citations in your resume
+\makeatletter
+\renewcommand*{\bibliographyitemlabel}{\@biblabel{\arabic{enumiv}}}
+\makeatother
+
+% bibliography with mutiple entries
+\usepackage[labeled,resetlabels]{multibib}
+\newcites{A,B,C,D,E}{{Journal Publications},{Book Chapters},{Conference Publications},  {Patents} ,{Posters and Demonstrations}}
+
+%\nopagenumbers{}                             % uncomment to suppress automatic page numbering for CVs longer than one page
+%----------------------------------------------------------------------------------
+%            content
+%----------------------------------------------------------------------------------
+\begin{document}
+\maketitle
+
+\section{Education}
+\cventry{2007--2012}{Ph.D. in Mechanical Engineering}{University of Pennsylvania}{Philadelphia, PA}{}{}
+\cventry{2007--2010}{M.S. in Mechanical Engineering}{University of Pennsylvania}{Philadelphia, PA}{}{}
+\cventry{2002--2007}{B.S. in Computer Science with Honors}{Johns Hopkins University}{Baltimore, MD}{}{}
+\cventry{2002--2007}{B.S. in Mechanical Eng. with Honors}{Johns Hopkins University}{Baltimore, MD}{}{}
+
+\section{Ph.D. Thesis}
+\cvline{Title}{\emph{Combining Tactile and Kinesthetic Information for
+Improvements in Human and Machine Haptic Systems}}
+\cvline{Committee}{Dr. Katherine J. Kuchenbecker (advisor), Dr. Vijay Kumar, Dr. Mark Yim, and Dr. Seungmoon Choi}
+\cvline{Description}{\small Tactile cues provide a wealth of information and have the potential to revolutionize both haptic display technology and the performance of autonomous robotics. However, this information only becomes meaningful when correlated with the motion that generated it. In my thesis I show that by tightly coupling sensing and acting, it is possible to engineer systems with unique and sophisticated capabilities.}
+
+\section{Professional Experience}
+%\subsection{Vocational}
+\cventry{2012--Present}{Senior Robotics Engineer}{Rethink Robotics}{Boston, MA}{}{Research and development for Rethink Robotics first flagship product, Baxter, an interactive human-safe sensor-based robot for manufacturing environments. Lead engineer in charge of developing and implementing a variety of technical innovations such as interactive haptic feedback during robot task training, reactive motion control, robot tactile perception, and force control.}\newline{}%
+
+\cventry{Summer 2010}{Research Intern}{Willow Garage}{Menlo Park, CA}{}{Researched and developed robot manipulation capabilities that are now core components of the ROS and PR2 robot framework.\cite{Romano-TRO11-Grasp}\newline{}%
+}
+\cventry{2006--2007}{Research Engineer}{Johns Hopkins University Haptics Group}{Baltimore, MD}{}{Prototyped and designed controllers for minimally invasive surgical systems, including steerable needles and snake-like robots.\cite{Webster-TRO09-Cannula}\newline{}%
+}
+\cventry{Summer 2005}{Engineering Intern}{Department of Defense EOD}{Picatinny Arsenal, NJ}{}{Reverse-engineered foreign munitions for the development of training simulations. Developed add-on components to allow the QinetiQ Talon and iRobot Packbot to better perform improvised explosive device (IED) detection and disarmament missions in the field.\newline{}%
+}
+%Detailed achievements:%
+%\begin{itemize}%
+%\item Achievement 1;
+%\item Achievement 2, with sub-achievements:
+%  \begin{itemize}%
+% \item Sub-achievement (a);
+%  \item Sub-achievement (b), with sub-sub-achievements (don't do this!);
+%   \begin{itemize}
+%   \item Sub-sub-achievement i;
+%    \item Sub-sub-achievement ii;
+%    \item Sub-sub-achievement iii;
+%   \end{itemize}
+%  \item Sub-achievement (c);
+%  \end{itemize}
+%\item Achievement 3.
+%\end{itemize}}
+%\cventry{year--year}{Job title}{Employer}{City}{}{Description line 1\newline{}Description line 2}
+
+%\subsection{Miscellaneous}
+%\cventry{year--year}{Job title}{Employer}{City}{}{Description}
+
+%\section{Languages}
+%\cvlanguage{Language 1}{Skill level}{Comment}
+%\cvlanguage{Language 2}{Skill level}{Comment}
+%\cvlanguage{Language 3}{Skill level}{Comment}
+
+\section{Technical Skills}
+\subsection{Programming and Computer-related}
+\cvline{}{Highly Experienced: \small Octave/MATLAB, C/C++, OpenGL, ROS, \LaTeX, Linux}
+\cvline{}{Moderately Experienced: \small Python, RTAI/Xenomai, Java, network administration}
+\subsection{Mechanical Design}
+\cvline{}{Highly Experienced: \small Pro/E, rapid prototyping (3D and 2D)}
+\cvline{}{Moderately Experienced: \small SolidWorks, AutoCAD, CNC \& manual mill/lathe}
+\subsection{Electrical}
+\cvline{}{Highly Experienced: \small  SPI communication, surface-mount prototyping, microcontroller programming (AVR, STAMP, PIC), motor drive circuitry }
+\cvline{}{Moderately Experienced: \small PCB design \& fabrication, sensor integration, analog circuitry}
+%\cvcomputer{category 1}{XXX, YYY, ZZZ}{category 4}{XXX, YYY, ZZZ}
+%\cvcomputer{category 2}{XXX, YYY, ZZZ}{category 5}{XXX, YYY, ZZZ}
+%\cvcomputer{category 3}{XXX, YYY, ZZZ}{category 6}{XXX, YYY, ZZZ}
+
+%\section{Interests}
+%\cvline{hobby 1}{\small Description}
+%\cvline{hobby 2}{\small Description}
+%\cvline{hobby 3}{\small Description}
+
+\section{Honors, Awards, and Professional Affiliations}
+\subsection{Honors and Awards}
+\cvline{}{Ashton Graduate Research Fellowship Award, 2007-2011}
+\cvline{}{IEEE Haptics Symposium, Best Short Oral Presentation, 2010}
+\cvline{}{Robotics and Automation Society Travel Grant, ICRA, 2010}
+\cvline{}{National Science Foundation Travel Grant, ICRA, 2009}
+\cvline{}{UPenn Outstanding Teaching Assistant Award in Mechanical Engineering, 2008}
+\cvline{}{NSF Graduate Research Fellowship, Honorable Mention, 2006, 2007, 2008}
+\cvline{}{ASME Maryland Regional Design Competition, $1^{st}$ Place Award, 2007}
+\cvline{}{American College Hockey Association (ACHA) Academic All-American, 2006-2007}
+
+\subsection{Affiliations}
+\cvline{}{Upsilon Pi Epsilon (UPE), Computer Science Honor Society}
+\cvline{}{Institute of Electrical and Electronics Eng. (IEEE), Robotics and Automation Society}
+\cvline{}{Association for Computing Machinery (ACM)}
+\cvline{}{American Society of Mechanical Engineers (ASME)}
+
+%\cvlistitem{Item 1}
+%\cvlistitem{Item 2}
+%\cvlistitem[+]{Item 3}            % optional other symbol
+
+%\renewcommand{\listitemsymbol}{-} % change the symbol for lists
+
+%\section{Extra 2}
+%\cvlistdoubleitem{Item 1}{Item 4}
+%\cvlistdoubleitem{Item 2}{Item 5 \cite{book1}}
+%\cvlistdoubleitem{Item 3}{}
+
+% Publications from a BibTeX file without multibib\renewcommand*{\bibliographyitemlabel}{\@biblabel{\arabic{enumiv}}}% for BibTeX %numerical labels1
+
+% Publications from a BibTeX file using the multibib package
+\section{Publications}
+\nociteA{*}
+\bibliographystyleA{plainyr-rev}
+\bibliographyA{journal}   % the name of a BibTeX file
+
+\nociteB{*}
+\bibliographystyleB{plainyr-rev}
+\bibliographyB{book}   %the name of a BibTeX file
+
+\nociteC{*}
+\bibliographystyleC{plainyr-rev}
+\bibliographyC{conference}   %the name of a BibTeX file
+
+\nociteD{*}
+\bibliographystyleD{plainyr-rev}
+\bibliographyD{patent}   % the name of a BibTeX file
+
+\nociteE{*}
+\bibliographystyleE{plainyr-rev}
+\bibliographyE{posterdemo}   % the name of a BibTeX file
+
+
+
+%\centerline{
+%   \href{http://www.seas.upenn.edu/~jrom}{\includegraphics[width=2in]{./figures/website_qr.png}}
+%}
+
+\begin{center} Please visit my website for additional multimedia content. \end{center}
+\begin{center} \href{http://www.jromano.uphero.com}{http://www.jromano.uphero.com} \end{center}
+
+
+
+\end{document}
+
+
+%% end of file `template_en.tex'.

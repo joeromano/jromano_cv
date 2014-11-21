@@ -1,0 +1,35 @@
+\begin{thebibliography}{1}
+
+\bibitem{Romano-EH10-321}
+Joseph~M. Romano, Nils Landin, William McMahan, and Katherine~J. Kuchenbecker.
+\newblock Texturepad: Realistic rendering of haptic textures.
+\newblock Hands-on demonstration presented at EuroHaptics, Amsterdam, the
+  Netherlands, July 2010.
+
+\bibitem{Romano-Stanford10-Tablet}
+Joseph~M. Romano and Katherine~J. Kuchenbecker.
+\newblock Realistic haptic contacts and textures for tablet computing.
+\newblock Hands-on demonstration presented at the Stanford Medical Innovation
+  Conference on Medical Robotics, Stanford, California, April 2010.
+
+\bibitem{Romano-HS10-TexturePadDemo}
+Joseph~M. Romano and Katherine~J. Kuchenbecker.
+\newblock Realistic haptic contacts and textures for tablet computing.
+\newblock Hands-on demonstration presented at IEEE Haptics Symposium, Boston,
+  Massachusetts, March 2010.
+\newblock Award: Best Short Oral Presentation.
+
+\bibitem{Romano-WH09-SlipDemo}
+Joseph~M. Romano, Nathan Jacobs, and Stephen Gray.
+\newblock The haptic slip glove.
+\newblock Hands-on demonstration presented at IEEE World Haptics Conference,
+  March 2009.
+
+\bibitem{Romano-ERC07-Needles}
+Joseph~M. Romano, Robert J.~Webster III, Noah~J. Cowan, and Allison~M. Okamura.
+\newblock Teleoperation of steerable needles.
+\newblock Poster. Johns Hopkins University Engineering Research Center,
+  National Science Foundation (NSF) Engineering Research Center (ERC)
+  Symposium, 2007.
+
+\end{thebibliography}

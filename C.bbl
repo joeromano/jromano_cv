@@ -1,0 +1,73 @@
+\begin{thebibliography}{10}
+
+\bibitem{Gray-IDETC11-ARMS}
+Stephen~R. Gray, Joseph~M. Romano, Jordan Brindza, Soonkyum Kim, Katherine~J.
+  Kuchenbecker, and Vijay Kumar.
+\newblock Planning manipulation and grasping tasks with a redundant arm.
+\newblock In {\em Proc. ASME 2011 International Design Engineering Technical
+  Conferences \& Computers and Information in Engineering Conference}, August
+  2011.
+
+\bibitem{Landin10-EH-Reduction}
+Nils Landin, Joseph~M. Romano, William McMahan, and Katherine~J. Kuchenbecker.
+\newblock Dimensional reduction of high-frequency accelerations for haptic
+  rendering.
+\newblock In {\em Haptics: Generating and Perceiving Tangible Sensations,
+  Proc.\ EuroHaptics, Part II}, volume 6192 of {\em Lecture Notes in Computer
+  Science}, pages 79--86. Springer, July 2010.
+
+\bibitem{Croom-ICRA10-SOM}
+Jordan~M. Croom, Daniel~C. Rucker, Joseph~M. Romano, and Robert J.~Webster III.
+\newblock Visual sensing of continuum robot shape using self-organizing maps.
+\newblock In {\em Proc. IEEE International Conference on Robotics and
+  Automation}, pages 4591--4596, May 2010.
+
+\bibitem{Romano-ICRA10-Synthesis}
+Joseph~M. Romano, Takashi Yoshioka, and Katherine~J. Kuchenbecker.
+\newblock Automatic filter design for synthesis of haptic textures from
+  recorded acceleration data.
+\newblock In {\em Proc. IEEE International Conference on Robotics and
+  Automation}, pages 1812--1821, May 2010.
+
+\bibitem{Winfree-ICRA10-ITU}
+Kyle~N. Winfree, Joseph~M. Romano, Jamie Gewirtz, and Katherine~J.
+  Kuchenbecker.
+\newblock Control of a high fidelity ungrounded torque feedback device: The
+  itorqu 2.1.
+\newblock In {\em Proc. IEEE International Conference on Robotics and
+  Automation}, pages 1347--1352, May 2010.
+
+\bibitem{McMahan-HS10-Realism}
+William McMahan, Joseph~M. Romano, Amal M.~Abdul Rahuman, and Katherine~J.
+  Kuchenbecker.
+\newblock High frequency acceleration feedback significantly increases the
+  realism of haptically rendered textured surfaces.
+\newblock In {\em Proc. IEEE Haptics Symposium}, pages 141--148, March 2010.
+
+\bibitem{Romano-WH09-SlipGlove}
+Joseph~M. Romano, Stephen~R. Gray, Nathan~T. Jacobs, and Katherine~J.
+  Kuchenbecker.
+\newblock Toward tactilely transparent gloves: Collocated slip sensing and
+  vibrotactile actuation.
+\newblock In {\em Proc. IEEE World Haptics Conference}, pages 279--284, March
+  2009.
+
+\bibitem{Romano-MMVR09-Puncture}
+Joseph~M. Romano, Alla Safonova, and Katherine~J. Kuchenbecker.
+\newblock Real-time graphic and haptic simulation of deformable tissue
+  puncture.
+\newblock In {\em Proc. Medicine Meets Virtual Reality (MMVR17)}, January 2009.
+
+\bibitem{Webster-ICRA08-Kinematics}
+Robert J.~Webster III, Joseph~M. Romano, and Noah~J. Cowan.
+\newblock Kinematics and calibration of active cannulas.
+\newblock In {\em Proc. IEEE International Conference on Robotics and
+  Automation}, pages 3888--3895, May 2008.
+
+\bibitem{Romano-ICRA07-Teleop}
+Joseph~M. Romano, Robert J.~Webster III, and Allison~M. Okamura.
+\newblock Teleoperation of steerable needles.
+\newblock In {\em Proc. IEEE International Conference on Robotics and
+  Automation}, pages 934--939, May 2007.
+
+\end{thebibliography}

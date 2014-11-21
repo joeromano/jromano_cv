@@ -1,0 +1,26 @@
+\begin{thebibliography}{1}
+
+\bibitem{Romano-AURO13-Audio}
+Joseph~M. Romano, Jordan~P. Brindza, and Katherine~J. Kuchenbecker.
+\newblock Ros open-source audio recognizer: Roar environmental sound detection
+  tools for robot programming.
+\newblock {\em Autonomous Robotics}, Special Issue on Open-Source
+  Robotics:Conditionally Accepted, 2013.
+
+\bibitem{Romano-TOH11-Haptography}
+Joseph~M. Romano and Katherine~J. Kuchenbecker.
+\newblock Creating realistic virtual textures from contact acceleration data.
+\newblock {\em IEEE Transactions on Haptics}, 5(2):109--119, 2012.
+
+\bibitem{Romano-TRO11-Grasp}
+Joseph~M. Romano, Kaijen Hsiao, G\"{u}nter Niemeyer, Sachin Chitta, and
+  Katherine~J. Kuchenbecker.
+\newblock Human-inspired robotic grasp control with tactile sensing.
+\newblock {\em IEEE Transactions on Robotics}, 27(6):1067--1079, 2011.
+
+\bibitem{Webster-TRO09-Cannula}
+Robert~J. Webster, Joseph~M. Romano, and Noah~J. Cowan.
+\newblock Mechanics of precurved-tube continuum robots.
+\newblock {\em IEEE Transactions on Robotics}, 25(1):67--78, 2009.
+
+\end{thebibliography}
