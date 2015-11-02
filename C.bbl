@@ -1,5 +1,9 @@
 \begin{thebibliography}{10}
 
+\bibitem{Romano-HS14-PR2HAP}
+Joseph~M. Romano and Katherine~J Kuchenbecker.
+\newblock Methods for robotic tool-mediated haptic surface recognition.
+\newblock In {\em Proc. IEEE Haptics Symposium}, pages 49--56, February 2014.
 
 \bibitem{Gray-IDETC11-ARMS}
 Stephen~R. Gray, Joseph~M. Romano, Jordan Brindza, Soonkyum Kim, Katherine~J.
@@ -13,9 +17,9 @@ Stephen~R. Gray, Joseph~M. Romano, Jordan Brindza, Soonkyum Kim, Katherine~J.
 Nils Landin, Joseph~M. Romano, William McMahan, and Katherine~J. Kuchenbecker.
 \newblock Dimensional reduction of high-frequency accelerations for haptic
   rendering.
-\newblock In {\em Haptics: Generating and Perceiving Tangible Sensations,
-  Proc.\ EuroHaptics, Part II}, volume 6192 of {\em Lecture Notes in Computer
-  Science}, pages 79--86. Springer, July 2010.
+\newblock In {\em Haptics: Generating and Perceiving Tangible Sensations},
+  volume 6192 of {\em Lecture Notes in Computer Science}, pages 79--86.
+  Springer, July 2010.
 
 \bibitem{Croom-ICRA10-SOM}
 Jordan~M. Croom, Daniel~C. Rucker, Joseph~M. Romano, and Robert J.~Webster III.

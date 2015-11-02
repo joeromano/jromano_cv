@@ -1,21 +1,20 @@
 \begin{thebibliography}{1}
 
-\bibitem{Chen-Patent12-Interface}
-Elaine Chen, Rodney Brooks, Chris Buehler, Matthew Williamson, Bruce Blumberg,
-  Noelle Dye, Joseph Romano, and W.~Goodwin.
-\newblock User interface for robot.
-\newblock United States patent application \#13/621,561, September 17 2012.
-
-\bibitem{Williamson-Patent12-Constraint}
-Matthew Williamson, Matthew DiCicco, and Joseph Romano.
-\newblock Constraining robotics manipulation with redundant degrees of freedom.
-\newblock United States patent application \#61/701,900, September 17 2012.
-
 \bibitem{Kuchenbecker-Patent10-Texture}
 Katherine~J. Kuchenbecker, Joseph~M. Romano, William McMahan, and Nils Landin.
 \newblock Systems and methods for capturing and recreating the feel of
   surfaces.
-\newblock Provisional United States patent application \#61/369,254, July 30
-  2010.
+\newblock United States Patent 8988445, March 24 2015.
+
+\bibitem{Chen-Patent12-Interface}
+Elaine Chen, Rodney Brooks, Chris Buehler, Matthew Williamson, Bruce Blumberg,
+  Noelle Dye, Joseph Romano, and William Goodwin.
+\newblock User interface for robot training.
+\newblock United States Patent 8965576, February 24 2015.
+
+\bibitem{Williamson-Patent12-Constraint}
+Matthew Williamson, Matthew DiCicco, and Joseph Romano.
+\newblock Constraining robotics manipulation with redundant degrees of freedom.
+\newblock United States Patent Application \#61/701,900, September 17 2013.
 
 \end{thebibliography}

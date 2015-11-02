@@ -1,9 +1,15 @@
 \begin{thebibliography}{1}
 
+\bibitem{Wurman-RAM15-APC}
+Peter Wurman and Joseph~M. Romano.
+\newblock The {A}mazon {P}icking {C}hallenge 2015.
+\newblock {\em IEEE Robotics And Automation Magazine}, 22(3):10--12, September
+  2015.
+
 \bibitem{Romano-AURO13-Audio}
 Joseph~M. Romano, Jordan~P. Brindza, and Katherine~J. Kuchenbecker.
-\newblock Ros open-source audio recognizer: Roar environmental sound detection
-  tools for robot programming.
+\newblock {ROS} {O}pen-source {A}udio {R}ecognizer: {ROAR} {E}nvironmental
+  sound detection tools for robot programming.
 \newblock {\em Autonomous Robotics}, 34(3):207--215, 2013.
 
 \bibitem{Romano-TOH11-Haptography}
